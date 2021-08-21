@@ -16,5 +16,11 @@ namespace Oca
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            dado dice = new dado();
+            Controls.Add(dice);
+        }
     }
 }
