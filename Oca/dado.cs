@@ -8,26 +8,27 @@ using System.Windows.Forms;
 
 namespace Oca
 {
-    class dado : PictureBox
+    public class dado : PictureBox
     {
         private const string cartellaDadoWhite = "../../imgs/dice/white/";
         private const string cartellaDadoBlack = "../../imgs/dice/black/";
         private const string randomDiceImg = "NA", rotationDicePrefix = "R", estensione = ".png";
         private string cartellaDado = cartellaDadoBlack;
-        private Size dimensioni = new Size(64, 64);
+        private Size dimensioni = new Size(512, 512);
         private int dadoMin = 1, dadoMax = 6;
         private int durataAnimazione = 3, nFacceCambiate = 0, tempoCambioFaccia = 100;
         private int numeroEstratto = -1;
         private bool animazione = false;
         private Random rand = new Random();
         private Timer timerCambioFaccia = new Timer();
+        private Point posizione = new Point(1000, 350);
 
 
         public dado()
         {
             SizeMode = PictureBoxSizeMode.StretchImage;    //Strech dell'immagine
             ImageLocation = cartellaDado + randomDiceImg + estensione;   //Imposto la prima immagine visualizzata
-            Location = new Point(150, 150);     //Imposto la posizione del dado
+            Location = posizione;     //Imposto la posizione del dado
             Size = dimensioni;      //Imposto la dimensione della picturebox
             Click += onClick;   //Associo la funzione di click
 
@@ -77,6 +78,14 @@ namespace Oca
         private void randomDiceRotatingFace()
         {
             ImageLocation = cartellaDado + rotationDicePrefix + rand.Next(dadoMin, dadoMax + 1) + estensione;
+        }
+
+        public bool Animazione { get { return animazione; } set { animazione = value; } }
+
+        public void cambioStile()
+        {
+            //Funzione per lo switch della cartella dello stile del dado
+            cartellaDado = (cartellaDado == cartellaDadoBlack) ? cartellaDadoWhite : cartellaDadoBlack;
         }
     }
 }
