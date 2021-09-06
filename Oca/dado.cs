@@ -14,15 +14,13 @@ namespace Oca
         private const string cartellaDadoBlack = "../../imgs/dice/black/";
         private const string randomDiceImg = "NA", rotationDicePrefix = "R", estensione = ".png";
         private string cartellaDado = cartellaDadoBlack;
-        private Size dimensioni = new Size(512, 512);
+        private Size dimensioni = new Size(64, 64);
         private int dadoMin = 1, dadoMax = 6;
         private int durataAnimazione = 3, nFacceCambiate = 0, tempoCambioFaccia = 100;
         private int numeroEstratto = -1;
         private bool animazione = false;
-        private Random rand = new Random();
         private Timer timerCambioFaccia = new Timer();
         private Point posizione = new Point(1000, 350);
-
 
         public dado()
         {
@@ -47,6 +45,7 @@ namespace Oca
         public int TiraDado()
         {
             //Funzione che se necessario richiama l'animazione del tiro del dado, successivamente estrae un numero da min,max e lo restituisce
+            Random rand = new Random();
             if (animazione) AnimazioneTiro();
             numeroEstratto = rand.Next(dadoMin, dadoMax + 1);
             return numeroEstratto;
@@ -77,6 +76,7 @@ namespace Oca
 
         private void randomDiceRotatingFace()
         {
+            Random rand = new Random();
             ImageLocation = cartellaDado + rotationDicePrefix + rand.Next(dadoMin, dadoMax + 1) + estensione;
         }
 

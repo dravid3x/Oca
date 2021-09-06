@@ -11,7 +11,6 @@ namespace Oca
     public class casella : PictureBox
     {
         private Size dimensioni = new Size(100, 100);
-        private Random rand = new Random();
         private int numeroCasella = 0;
         private int tipoCasella = 0;  //-1 -> Indietro | 0 -> Normale | 1 -> Avanza
         private int distanzaMovimento = 0;
@@ -58,6 +57,7 @@ namespace Oca
 
         private void onClick(object sender, EventArgs e)
         {
+            Random rand = new Random();
             numeroCasella = rand.Next(1, 51);
             Invalidate();
         }

@@ -13,7 +13,7 @@ namespace Oca
         private Size dimensioni = new Size(40, 40);
         private Point posizione = new Point(380, 380);
         private Color colorePedina = Color.DeepPink;
-        private int posizioneInCasella = 0;
+        private int posizioneInCasella = 1;
         private int percentualeDimensione = 30;
 
         public pedina()
