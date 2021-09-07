@@ -19,7 +19,7 @@ namespace Oca
             InitializeComponent();
             Size = new Size(1280, 1024);
             StartPosition = FormStartPosition.CenterScreen;
-            
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -27,6 +27,7 @@ namespace Oca
             gestoreGioco = new gameManager(this);
             gestoreGioco.generaCampo();
             gestoreGioco.generaDado();
+            gestoreGioco.dadoAbilitato = true;
         }
     }
 }

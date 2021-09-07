@@ -10,7 +10,7 @@ namespace Oca
     class gameManager
     {
         private const int dim = 65;
-        private dado Dado = new dado();
+        public dado Dado = new dado();
         private casella[] casellas = new casella[dim];
         private Point posDado;
         private Form1 miaF1;
@@ -41,7 +41,8 @@ namespace Oca
                 {
                     posTemp.Y += casellas[0].Size.Height;
                     avanti = !avanti;
-                } else posTemp.X += (avanti) ? casellas[i].Size.Width : -casellas[i].Size.Width;
+                }
+                else posTemp.X += (avanti) ? casellas[i].Size.Width : -casellas[i].Size.Width;
             }
 
             casellas[dim - 1].NumeroCasella = "Fine";
@@ -50,14 +51,14 @@ namespace Oca
         public void generaDado()
         {
             int dimX = miaF1.ClientSize.Width, dimY = miaF1.ClientSize.Height;
-            posDado = new Point(dimX - Dado.Size.Width - Dado.Size.Width / 2, dimY / 2 - Dado.Size.Height * 2);
+            posDado = new Point(dimX - Dado.Size.Width - Dado.Size.Width / 2, 50);
             Dado.Location = posDado;
             miaF1.Controls.Add(Dado);
         }
 
-        private void nascondiDado()
+        public bool dadoAbilitato
         {
-
+            set { Dado.abilitato = value; }
         }
     }
 }

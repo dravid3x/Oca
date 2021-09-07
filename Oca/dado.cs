@@ -14,6 +14,7 @@ namespace Oca
         private const string cartellaDadoBlack = "../../imgs/dice/black/";
         private const string randomDiceImg = "NA", rotationDicePrefix = "R", estensione = ".png";
         private string cartellaDado = cartellaDadoBlack;
+        private string defaultFace;
         private Size dimensioni = new Size(128, 128);
         private int dadoMin = 1, dadoMax = 6;
         private int durataAnimazione = 3, nFacceCambiate = 0, tempoCambioFaccia = 100;
@@ -24,8 +25,9 @@ namespace Oca
 
         public dado()
         {
+            defaultFace = cartellaDado + randomDiceImg + estensione;
             SizeMode = PictureBoxSizeMode.StretchImage;    //Strech dell'immagine
-            ImageLocation = cartellaDado + randomDiceImg + estensione;   //Imposto la prima immagine visualizzata
+            ImageLocation = defaultFace;   //Imposto la prima immagine visualizzata
             Location = posizione;     //Imposto la posizione del dado
             Size = dimensioni;      //Imposto la dimensione della picturebox
             Click += onClick;   //Associo la funzione di click
@@ -86,6 +88,21 @@ namespace Oca
         {
             //Funzione per lo switch della cartella dello stile del dado
             cartellaDado = (cartellaDado == cartellaDadoBlack) ? cartellaDadoWhite : cartellaDadoBlack;
+        }
+
+        public void resetFaccia()
+        {
+            ImageLocation = defaultFace;
+        }
+
+        public bool abilitato
+        {
+            set
+            {
+                if (value) Enabled = true;
+                else Enabled = false;
+                resetFaccia();
+            }
         }
     }
 }
