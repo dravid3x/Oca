@@ -9,7 +9,9 @@ namespace Oca
 {
     class gameManager
     {
+        private const int dim = 65;
         private dado Dado = new dado();
+        private casella[] casellas = new casella[dim];
         private Point posDado;
         private Form1 miaF1;
 
@@ -20,9 +22,7 @@ namespace Oca
 
         public void generaCampo()
         {
-            int dim = 65;
             Point posIniziale = new Point(10, 50);
-            casella[] casellas = new casella[dim];
             Random rand = new Random();
             casellas[0] = new casella(0, "Inizio");
             casellas[0].Location = new Point(posIniziale.X, posIniziale.Y);
