@@ -10,45 +10,52 @@ namespace Oca
     class gameManager
     {
         private dado Dado = new dado();
-        private Point posDado = new Point(500, 500);
+        private Point posDado;
         private Form1 miaF1;
 
         public gameManager(Form1 MiaF1)
         {
             miaF1 = MiaF1;
-            Dado.Location = posDado;
-            posDado = new Point(miaF1.ClientSize.Width / 2, miaF1.ClientSize.Height / 2);
+            posDado = new Point(miaF1.ClientSize.Width / 8, miaF1.ClientSize.Height / 8);
             Dado.Location = posDado;
             miaF1.Controls.Add(Dado);
-            casella Casella = new casella(0, 69);
-            pedina Piedino = new pedina();
-            Casella.Controls.Add(Piedino);
-            miaF1.Controls.Add(Casella);
-            Piedino.PosizioneInCasella = 5;
-            Piedino.impostaGrandezza();
         }
 
         public void generaCampo()
         {
-            Point posIniziale = new Point(200, 200);
-            casella[] casellas = new casella[10];
+            int dim = 65;
+            Point posIniziale = new Point(10, 50);
+            casella[] casellas = new casella[dim];
             Random rand = new Random();
+            casellas[0] = new casella(0, "Inizio");
+            casellas[0].Location = new Point(posIniziale.X, posIniziale.Y);
 
-            casellas[0] = new casella(0, rand.Next(0, 100));
-            casellas[0].Location = posIniziale;
+            posIniziale.X += casellas[0].Size.Width;
+            miaF1.Controls.Add(casellas[0]);
+            Point posTemp = posIniziale;
+            bool avanti = true;
 
-            for (int i = 1; i < 10; i++)
+            for (int i = 1; i < dim; i++)
             {
-                casellas[i] = new casella(0, rand.Next(0, 100));
-                casellas[i].Location = new Point(casellas[i - 1].Location.X + casellas[i].Size.Width, casellas[i - 1].Location.Y);
-                //casellas[i].Location = (i != 0) ? new Point(casellas[i - 1].Location.X + casellas[i].Size.Width, casellas[i - 1].Location.Y) : pos;
-            }
-
-
-            for (int i = 0; i < 10; i++)
-            {
+                casellas[i] = new casella(0, i.ToString());
+                casellas[i].Location = new Point(posTemp.X, posTemp.Y);
                 miaF1.Controls.Add(casellas[i]);
+                if (i % 9 == 0)
+                {
+                    posTemp.Y += casellas[0].Size.Height;
+                    avanti = !avanti;
+                } else posTemp.X += (avanti) ? casellas[i].Size.Width : -casellas[i].Size.Width;
             }
+
+            casellas[dim - 1].NumeroCasella = "Fine";
+        }
+
+        public void generaDado()
+        {
+            int dimX = miaF1.ClientSize.Width, dimY = miaF1.ClientSize.Height;
+            posDado = new Point(dimX - Dado.Size.Width * 7, dimY / 2 - Dado.Size.Height * 2);
+            Dado.Location = posDado;
+            miaF1.Controls.Add(Dado);
         }
     }
 }

@@ -12,15 +12,14 @@ namespace Oca
 {
     public partial class Form1 : Form
     {
-        private casella Casella = new casella(0, 69);
-        private pedina piedino = new pedina();
-        private Random rand = new Random();
         private gameManager gestoreGioco;
 
         public Form1()
         {
             InitializeComponent();
-            WindowState = FormWindowState.Maximized;
+            Size = new Size(1280, 1024);
+            StartPosition = FormStartPosition.CenterScreen;
+            //WindowState = FormWindowState.Maximized;
             
         }
 
@@ -28,6 +27,7 @@ namespace Oca
         {
             gestoreGioco = new gameManager(this);
             gestoreGioco.generaCampo();
+            gestoreGioco.generaDado();
         }
     }
 }

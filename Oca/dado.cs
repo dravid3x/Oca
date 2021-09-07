@@ -14,7 +14,7 @@ namespace Oca
         private const string cartellaDadoBlack = "../../imgs/dice/black/";
         private const string randomDiceImg = "NA", rotationDicePrefix = "R", estensione = ".png";
         private string cartellaDado = cartellaDadoBlack;
-        private Size dimensioni = new Size(64, 64);
+        private Size dimensioni = new Size(128, 128);
         private int dadoMin = 1, dadoMax = 6;
         private int durataAnimazione = 3, nFacceCambiate = 0, tempoCambioFaccia = 100;
         private int numeroEstratto = -1;

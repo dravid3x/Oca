@@ -11,12 +11,12 @@ namespace Oca
     public class casella : PictureBox
     {
         private Size dimensioni = new Size(100, 100);
-        private int numeroCasella = 0;
+        private string numeroCasella = "0";
         private int tipoCasella = 0;  //-1 -> Indietro | 0 -> Normale | 1 -> Avanza
         private int distanzaMovimento = 0;
         private Point posizione = new Point(400, 400);
 
-        public casella(int nDistanza, int nCasella)
+        public casella(int nDistanza, string nCasella)
         {
             distanzaMovimento = nDistanza;
             //Imposto il tipo di casella per riconoscerla in futuro
@@ -57,9 +57,11 @@ namespace Oca
 
         private void onClick(object sender, EventArgs e)
         {
-            Random rand = new Random();
-            numeroCasella = rand.Next(1, 51);
-            Invalidate();
+            //Random rand = new Random();
+            //numeroCasella = rand.Next(1, 51).ToString();
+            //Invalidate();
         }
+
+        public string NumeroCasella { get { return numeroCasella; } set { numeroCasella = value; } }
     }
 }
