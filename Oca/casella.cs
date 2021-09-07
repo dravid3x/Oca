@@ -50,7 +50,7 @@ namespace Oca
             e.Graphics.DrawString(Convert.ToString(numeroCasella), drawFont, drawBrush, locationToDraw);
         }
 
-        public void CambiaTesto(string testo)
+        public void cambiaTesto(string testo)
         {
             Invalidate();
         }

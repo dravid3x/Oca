@@ -19,7 +19,6 @@ namespace Oca
             InitializeComponent();
             Size = new Size(1280, 1024);
             StartPosition = FormStartPosition.CenterScreen;
-            //WindowState = FormWindowState.Maximized;
             
         }
 

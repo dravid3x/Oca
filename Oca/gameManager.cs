@@ -16,9 +16,6 @@ namespace Oca
         public gameManager(Form1 MiaF1)
         {
             miaF1 = MiaF1;
-            posDado = new Point(miaF1.ClientSize.Width / 8, miaF1.ClientSize.Height / 8);
-            Dado.Location = posDado;
-            miaF1.Controls.Add(Dado);
         }
 
         public void generaCampo()
@@ -53,9 +50,14 @@ namespace Oca
         public void generaDado()
         {
             int dimX = miaF1.ClientSize.Width, dimY = miaF1.ClientSize.Height;
-            posDado = new Point(dimX - Dado.Size.Width * 7, dimY / 2 - Dado.Size.Height * 2);
+            posDado = new Point(dimX - Dado.Size.Width - Dado.Size.Width / 2, dimY / 2 - Dado.Size.Height * 2);
             Dado.Location = posDado;
             miaF1.Controls.Add(Dado);
+        }
+
+        private void nascondiDado()
+        {
+
         }
     }
 }

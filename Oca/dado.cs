@@ -39,19 +39,19 @@ namespace Oca
         private void onClick(object sender, EventArgs e)
         {
             //Funzione richiamata al click sul dado. Funzione che richiama l'estrazione di un numero
-            TiraDado();
+            tiraDado();
         }
 
-        public int TiraDado()
+        public int tiraDado()
         {
             //Funzione che se necessario richiama l'animazione del tiro del dado, successivamente estrae un numero da min,max e lo restituisce
             Random rand = new Random();
-            if (animazione) AnimazioneTiro();
+            if (animazione) animazioneTiro();
             numeroEstratto = rand.Next(dadoMin, dadoMax + 1);
             return numeroEstratto;
         }
 
-        private void AnimazioneTiro()
+        private void animazioneTiro()
         {
             //Attivo il timer dell'animazione
             nFacceCambiate = 0;
