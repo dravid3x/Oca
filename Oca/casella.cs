@@ -15,6 +15,7 @@ namespace Oca
         private int tipoCasella = 0;  //-1 -> Indietro | 0 -> Normale | 1 -> Avanza
         private int distanzaMovimento = 0;
         private Point posizione = new Point(400, 400);
+        private List<pedina> ospiti = new List<pedina>();
 
         public casella(int nDistanza, string nCasella)
         {
@@ -63,5 +64,29 @@ namespace Oca
         }
 
         public string NumeroCasella { get { return numeroCasella; } set { numeroCasella = value; } }
+
+        public void aggiungiOspite(pedina ospite)
+        {
+            Controls.Add(ospite);
+            ospiti.Add(ospite);
+            ospite.PosizioneInCasella = ospiti.Count;
+            ospite.impostaGrandezza();
+        }
+
+        public void rimuoviOspite(pedina ospite)
+        {
+            ospiti.Remove(ospite);
+            ricalcolaPosOspiti();
+        }
+
+        private void ricalcolaPosOspiti()
+        {
+            int i = 1;
+            foreach (pedina giocatore in ospiti)
+            {
+                giocatore.PosizioneInCasella = i++;
+                giocatore.impostaGrandezza();
+            }
+        }
     }
 }

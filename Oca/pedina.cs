@@ -8,13 +8,14 @@ using System.Windows.Forms;
 
 namespace Oca
 {
-    class pedina : PictureBox
+    public class pedina : PictureBox
     {
         private Size dimensioni = new Size(40, 40);
         private Point posizione = new Point(380, 380);
         private Color colorePedina = Color.DeepPink;
         private int posizioneInCasella = 1;
         private int percentualeDimensione = 30;
+        private int nCasellaOspitante = 0;
 
         public pedina()
         {
@@ -92,10 +93,13 @@ namespace Oca
                         Location = new Point(Parent.Size.Width - Size.Width, Parent.Size.Height - Size.Height);
                         break;
                     default:
+                        Location = new Point(Parent.Size.Width - Size.Width, Parent.Size.Height - Size.Height);
                         break;
                 }
             }
         }
+
+        public int NCasellaOspitante { get { return nCasellaOspitante; } set { nCasellaOspitante = value; } }
 
     }
 }

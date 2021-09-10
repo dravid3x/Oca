@@ -25,8 +25,11 @@ namespace Oca
         private void Form1_Load(object sender, EventArgs e)
         {
             gestoreGioco = new gameManager(this);
+            gestoreGioco.NGiocatori = 4;
+            gestoreGioco.generaLabelTurni();
             gestoreGioco.generaCampo();
             gestoreGioco.generaDado();
+            gestoreGioco.generaGiocatori();
             gestoreGioco.dadoAbilitato = true;
         }
     }
