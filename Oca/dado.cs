@@ -30,7 +30,7 @@ namespace Oca
             ImageLocation = defaultFace;   //Imposto la prima immagine visualizzata
             Location = posizione;     //Imposto la posizione del dado
             Size = dimensioni;      //Imposto la dimensione della picturebox
-            Click += onClick;   //Associo la funzione di click
+            //Click += onClick;   //Associo la funzione di click
 
             //Animazione
             animazione = true;
@@ -38,11 +38,11 @@ namespace Oca
             timerCambioFaccia.Tick += TimerCambioFaccia_Tick;
         }
 
-        private void onClick(object sender, EventArgs e)
-        {
-            //Funzione richiamata al click sul dado. Funzione che richiama l'estrazione di un numero
-            tiraDado();
-        }
+        //private void onClick(object sender, EventArgs e)
+        //{
+        //    //Funzione richiamata al click sul dado. Funzione che richiama l'estrazione di un numero
+        //    tiraDado();
+        //}
 
         public int tiraDado()
         {

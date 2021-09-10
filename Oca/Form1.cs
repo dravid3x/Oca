@@ -26,11 +26,11 @@ namespace Oca
         {
             gestoreGioco = new gameManager(this);
             gestoreGioco.NGiocatori = 4;
-            gestoreGioco.generaLabelTurni();
             gestoreGioco.generaCampo();
             gestoreGioco.generaDado();
             gestoreGioco.generaGiocatori();
             gestoreGioco.dadoAbilitato = true;
+            gestoreGioco.generaLabelTurni();
         }
     }
 }

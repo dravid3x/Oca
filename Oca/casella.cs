@@ -16,13 +16,15 @@ namespace Oca
         private int distanzaMovimento = 0;
         private Point posizione = new Point(400, 400);
         private List<pedina> ospiti = new List<pedina>();
+        private Color coloreSfondo = Color.FromArgb(255, 186, 73, 255);
+        private Color coloreSfondoSecondo = Color.FromArgb(255, 48, 217, 178);
 
         public casella(int nDistanza, string nCasella)
         {
             distanzaMovimento = nDistanza;
             //Imposto il tipo di casella per riconoscerla in futuro
             if (distanzaMovimento < 0) tipoCasella = -1;
-            else if (distanzaMovimento > 0) tipoCasella = -1;
+            else if (distanzaMovimento > 0) tipoCasella = 1;
             else tipoCasella = 0;
 
             numeroCasella = nCasella;
@@ -31,7 +33,7 @@ namespace Oca
             Location = posizione;   //Imposto la posizione
             SizeMode = PictureBoxSizeMode.StretchImage;
             Size = dimensioni;      //Imposto la dimensione della picturebox
-            BackColor = Color.FromArgb(255, 186, 73, 255);
+            BackColor = coloreSfondo;
 
             Paint += new PaintEventHandler(Picturebox_Paint);
             Click += onClick;
@@ -88,5 +90,9 @@ namespace Oca
                 giocatore.impostaGrandezza();
             }
         }
+
+        public int TipoCasella { get { return tipoCasella; } }
+
+        public int DistanzaMovimento {  get {  return distanzaMovimento; } }
     }
 }

@@ -101,5 +101,7 @@ namespace Oca
 
         public int NCasellaOspitante { get { return nCasellaOspitante; } set { nCasellaOspitante = value; } }
 
+        public Color ColorePedina { get { return colorePedina; } }
+
     }
 }

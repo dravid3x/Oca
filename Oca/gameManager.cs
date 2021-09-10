@@ -18,12 +18,14 @@ namespace Oca
         private Point posDado;
         private Form1 miaF1;
         private Label labelTurnoGiocatore = new Label();
-        private int turnoGiocatore = 0;
+        private pedina Temp = new pedina();
+        private int nGiocatoreAttuale = 2;
         private int numeroEstratto;
 
         public gameManager(Form1 MiaF1)
         {
             miaF1 = MiaF1;
+            miaF1.Controls.Add(Temp);
         }
 
         public void generaGiocatori()
@@ -61,7 +63,7 @@ namespace Oca
 
             for (int i = 1; i < dimCampo; i++)
             {
-                campo[i] = new casella(0, i.ToString());
+                campo[i] = new casella(rand.Next(-5, 6), i.ToString());
                 campo[i].Location = new Point(posTemp.X, posTemp.Y);
                 miaF1.Controls.Add(campo[i]);
                 if (i % 9 == 0)
@@ -77,6 +79,7 @@ namespace Oca
 
         public void generaDado()
         {
+            Dado.Click += dadoOnClick;
             int dimX = miaF1.ClientSize.Width, dimY = miaF1.ClientSize.Height;
             posDado = new Point(dimX - Dado.Size.Width - Dado.Size.Width / 2, 150);
             Dado.Location = posDado;
@@ -92,8 +95,79 @@ namespace Oca
 
         public void generaLabelTurni()
         {
+
             labelTurnoGiocatore.Location = new Point(10, 50);
+            labelTurnoGiocatore.Text = "Turno giocatore";
+            labelTurnoGiocatore.Size = new Size(300, 300);
+            labelTurnoGiocatore.Font = new Font("Arial", 24, FontStyle.Bold);
             miaF1.Controls.Add(labelTurnoGiocatore);
+            aggiornaLabelTurni();
+        }
+
+        private void aggiornaLabelTurni()
+        {
+            Temp.cambiaColore(giocatori[nGiocatoreAttuale].ColorePedina);
+            Temp.Size = new Size(64, 64);
+            Temp.Location = new Point(310, labelTurnoGiocatore.Location.Y);
+        }
+
+        private void dadoOnClick(object sender, EventArgs e)
+        {
+            //Funzione richiamata al click sul dado. Funzione che richiama l'estrazione di un numero
+            numeroEstratto = Dado.tiraDado();
+            Timer timerMovimento = new Timer();
+            timerMovimento.Interval = 500;
+            timerMovimento.Tick += TimerMovimento_Tick;
+            timerMovimento.Enabled = true;
+            //MessageBox.Show("É uscito il numero " + numeroEstratto.ToString());
+        }
+
+        private void TimerMovimento_Tick(object sender, EventArgs e)
+        {
+            //Funzione per lo spostamento della pedina in base all'estrazione del dado e alla attivazione della casella speciale
+            Timer mandante = sender as Timer;
+            mandante.Enabled = false;
+
+            //Gestione movimento dato lancio del dado
+            int nCasellaArrivo = giocatori[nGiocatoreAttuale].NCasellaOspitante + numeroEstratto;
+            spostaPedina(nGiocatoreAttuale, nCasellaArrivo);
+            giocatori[nGiocatoreAttuale].NCasellaOspitante = nCasellaArrivo;
+            MessageBox.Show("É uscito un " + numeroEstratto.ToString() + "\nIl Giocatore arriva alla casella numero " + nCasellaArrivo.ToString());
+
+            //Movimento dato evento della casella
+            bool evento = false;
+            string messaggio = "", titolo = "";
+            int distanzaMovimento = campo[nCasellaArrivo].DistanzaMovimento;
+            int distanzaMovimentoStampa = distanzaMovimento;
+            if (distanzaMovimentoStampa < 0) distanzaMovimentoStampa *= -1;
+            switch (campo[nCasellaArrivo].TipoCasella)
+            {
+                case -1:
+                    titolo = "Imprevisto";
+                    messaggio = "Il giocatore retrocede di " + distanzaMovimentoStampa + " caselle\n";
+                    evento = true;
+                    break;
+                case 0:
+                    titolo = "Normale";
+                    messaggio = "Il giocatore rimane dov'è";
+                    evento = false;
+                    break;
+                case 1:
+                    titolo = "Avanzamento";
+                    messaggio = "Il giocatore avanza di " + distanzaMovimentoStampa + " caselle\n";
+                    evento = true;
+                    break;
+                default:
+                    break;
+            }
+            //Eseguo lo spostamento dell'evento
+            MessageBox.Show(messaggio, titolo);
+            int nuovaCasellaArrivo = nCasellaArrivo + distanzaMovimento;
+            spostaPedina(nGiocatoreAttuale, nuovaCasellaArrivo);
+            //Imposto il giocatore del turno successivo
+            if (nGiocatoreAttuale < nGiocatori - 1) nGiocatoreAttuale++;
+            else nGiocatoreAttuale = 0;
+            aggiornaLabelTurni();
         }
     }
 }
